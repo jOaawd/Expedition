@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expedition</title>
+    <title>Expedition|Games</title>
     <link rel="icon" type="image/x-icon" href="https://pngfre.com/wp-content/uploads/Astronaut-PNG-35-1024x1024.png">
     <style>
         body {
@@ -102,7 +102,7 @@
 </head>
 <body>
     <div class="stars"></div>
-    <h1>Expedition - Game Portal</h1>
+    <h1>Expedition Portal</h1>
     <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." style="width: 80%; max-width: 600px; padding: 6px; border-radius: 30px;" />
     <div id="game-container" class="game-container"></div>
 
@@ -130,22 +130,53 @@
             })
             .catch(error => console.error("Error:", error));
 
-        function renderGames(gameList) {
-            const container = document.getElementById("game-container");
-            container.innerHTML = "";
-            gameList.forEach(project => {
-                const game = document.createElement("a");
-                game.href = "#";
-                game.className = "game-link";
-                game.onclick = () => openGame(project.link);
-                game.innerHTML = `
-                    <div class="game-tile">
-                        <img class="game-icon" src="${project.imgSrc}" alt="icon" />
-                        <p class="game-title">${project.title}</p>
-                    </div>`;
-                container.appendChild(game);
-            });
-        }
+      function renderGames(gameList) {
+    const container = document.getElementById("game-container");
+    container.innerHTML = "";
+    gameList.forEach(project => {
+        const game = document.createElement("a");
+        game.href = "#";
+        game.className = "game-link";
+        game.onclick = () => openGame(project.link);
+        game.innerHTML = `
+            <div style="
+                position: relative;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(8px);
+                border-radius: 8px;
+                padding: 10px;
+                text-align: center;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 120px; 
+            " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0px 3px 8px rgba(255, 255, 255, 0.15)';"
+               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                <img src="${project.imgSrc}" alt="${project.title} icon" style="
+                    width: 80px; 
+                    height: 80px;
+                    border-radius: 8px;
+                " />
+                <p style="
+                    color: white;
+                    font-weight: bold;
+                    margin-top: 5px; 
+                    font-size: 0.9rem; 
+                ">${project.title}</p>
+            </div>`;
+
+        container.appendChild(game);
+    });
+
+    container.style.display = "grid";
+    container.style.gridTemplateColumns = "repeat(auto-fill, minmax(120px, 1fr))";
+    container.style.gap = "8px"; 
+    container.style.padding = "10px"; 
+}
+
+
+
 
         function searchGames() {
             const filter = document.getElementById("search").value.toUpperCase();
