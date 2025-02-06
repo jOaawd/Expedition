@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Travel Exploration</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        /* Create stars using CSS */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .stars div {
+            position: absolute;
+            background-color: white;
+            width: 2px;
+            height: 2px;
+            animation: moveStars 50s linear infinite, flicker 1.5s alternate infinite;
+        }
+
+        /* Flicker effect */
+        @keyframes flicker {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Movement effect for stars */
+        @keyframes moveStars {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+
+        /* Generate random star positions */
+        .star1 { top: 20%; left: 10%; animation-duration: 60s; animation-delay: 2s;}
+        .star2 { top: 30%; left: 50%; animation-duration: 80s; animation-delay: 3s;}
+        .star3 { top: 40%; left: 70%; animation-duration: 40s; animation-delay: 1s;}
+        .star4 { top: 50%; left: 20%; animation-duration: 70s; animation-delay: 5s;}
+        .star5 { top: 60%; left: 80%; animation-duration: 90s; animation-delay: 4s;}
+        .star6 { top: 70%; left: 30%; animation-duration: 100s; animation-delay: 6s;}
+        .star7 { top: 80%; left: 90%; animation-duration: 110s; animation-delay: 2s;}
+        .star8 { top: 10%; left: 40%; animation-duration: 130s; animation-delay: 7s;}
+
+        /* Button Styling */
+        .btn {
+            background-color: rgba(0, 0, 255, 0.7);
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.6);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        /* Animation for time travel effect */
+        .fade {
+            animation: fadeEffect 2s forwards;
+        }
+
+        @keyframes fadeEffect {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Star warp effect for time travel */
+        @keyframes timeTravelEffect {
+            0% {
+                transform: scale(1) translateZ(0);
+                background-color: black;
+            }
+            50% {
+                transform: scale(2) translateZ(100px);
+                background-color: #000080;
+            }
+            100% {
+                transform: scale(1) translateZ(0);
+                background-color: black;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Starry Background -->
+    <div class="stars">
+        <div class="star1"></div>
+        <div class="star2"></div>
+        <div class="star3"></div>
+        <div class="star4"></div>
+        <div class="star5"></div>
+        <div class="star6"></div>
+        <div class="star7"></div>
+        <div class="star8"></div>
+    </div>
+
+    <!-- Explore Button -->
+    <button class="btn" id="exploreBtn">Explore</button>
+
+    <script>
+        document.getElementById('exploreBtn').addEventListener('click', function() {
+            // Apply the fade-out effect to the button and background
+            document.body.classList.add('fade');
+            document.querySelector('.btn').classList.add('fade');
+            
+            // Apply time travel effect (star warp)
+            document.querySelector('.stars').style.animation = 'timeTravelEffect 2s forwards';
+
+            // Wait for the animation to finish, then redirect
+            setTimeout(function() {
+                window.location.href = '/~'; // Redirect to /~
+            }, 2000); // Matches the duration of the time travel effect
+        });
+    </script>
+</body>
+</html>
