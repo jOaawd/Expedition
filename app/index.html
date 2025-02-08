@@ -183,16 +183,23 @@
             const filteredGames = games.filter(game => game.title.toUpperCase().includes(filter));
             renderGames(filteredGames);
         }
+function openGame(link) {
+    const newWin = window.open("about:blank", "_blank");
+    newWin.document.write(`
+        <html><head><title>Game</title></head>
+        <body style='margin:0;overflow:hidden;display:flex;justify-content:center;align-items:center;height:100vh;background:black;'>
+          <iframe srcdoc="
+              <html>
+              <head><title>Game Proxy</title></head>
+              <body style='margin:0;overflow:hidden;display:flex;justify-content:center;align-items:center;height:100vh;background:black;'>
+                <iframe src='${link}' style='width:100vw;height:100vh;border:none;'></iframe>
+              </body>
+              </html>
+          " style='width:100vw;height:100vh;border:none;'></iframe>
+        </body></html>`);
+    newWin.document.close();
+}
 
-        function openGame(link) {
-            const newWin = window.open("about:blank", "_blank");
-            newWin.document.write(`
-                <html><head><title>Game</title></head>
-                <body style='margin:0;overflow:hidden;display:flex;justify-content:center;align-items:center;height:100vh;background:black;'>
-                  <iframe src='${link}' style='width:100vw;height:100vh;border:none;'></iframe>
-                </body></html>`);
-            newWin.document.close();
-        }
     </script>
 </body>
 </html>
